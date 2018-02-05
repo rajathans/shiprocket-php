@@ -10,6 +10,8 @@ use ReflectionClass;
 
 class Client
 {
+    use Resources\Users;
+
 	private $access_token;
     private $email;
     private $password;

@@ -10,7 +10,17 @@ trait Orders
     public function getOrders()
     {
         return $this->request('get', 'orders');
-	}
+    }
+    
+    public function getOrder($order_id)
+    {
+        return $this->request('get', 'requests/'.$order_id);
+    }
+
+    public function createOrder($attributes = [])
+    {
+        return $this->request('post', 'orders', $attributes);
+    }
 
     /**
      * Makes a request to the Shiprocket API and returns the response.
