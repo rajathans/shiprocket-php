@@ -1,8 +1,12 @@
 <?php
 
-namespace rajathans\Shiprocket;
+namespace Shiprocket;
 
-use rajathans\Shiprocket\Client;
+$client = new Client([
+	'email' 		=> 'rajat.hans@kartrocket.com',
+	'password' 		=> '1q2w3e4r5t',
+	'use_sandbox'	=> 0
+]);
 
 class Example
 {

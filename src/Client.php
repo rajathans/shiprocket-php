@@ -1,6 +1,6 @@
 <?php 
 
-namespace rajathans\Shiprocket;
+namespace Shiprocket;
 
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\ClientException as HttpClientException;

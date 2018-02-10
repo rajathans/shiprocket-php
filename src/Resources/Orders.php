@@ -1,6 +1,6 @@
 <?php 
 
-namespace rajathans\Shiprocket\Resources;
+namespace Shiprocket\Resources;
 
 trait Orders
 {

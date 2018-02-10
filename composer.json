@@ -24,12 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "rajathans\\Shiprocket\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "rajathans\\Shiprocket\\Test\\": "tests/src/"
+            "Shiprocket\\": "src/"
         }
     },
     "minimum-stability": "stable"

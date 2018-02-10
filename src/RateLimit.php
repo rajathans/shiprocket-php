@@ -1,6 +1,6 @@
 <?php 
 
-namespace rajathans\Shiprocket;
+namespace Shiprocket;
 
 class RateLimit
 {
