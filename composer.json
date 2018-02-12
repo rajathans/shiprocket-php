@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Shiprocket\\": "src/"
+            "Shiprocket\\": "app/"
         }
     },
     "minimum-stability": "stable"

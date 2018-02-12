@@ -2,11 +2,11 @@
 
 namespace Shiprocket\Resources;
 
-trait Products
+trait Users
 {
-    public function login()
+    public function login($parameters = [])
     {
-        return $this->request('post', 'auth/login');
+        return $this->request('post', 'auth/login', $parameters);
     }
     
     public function getUser($user_id)

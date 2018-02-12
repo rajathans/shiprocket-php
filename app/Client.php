@@ -11,8 +11,13 @@ use ReflectionClass;
 class Client
 {
     use Resources\Users;
+    use Resources\Manifests;
+    use Resources\Products;
+    use Resources\Settings;
+    use Resources\Users;
+    use Resources\Orders;
 
-	private $access_token;
+	private $token;
     private $email;
     private $password;
 	private $use_sandbox;
@@ -38,8 +43,8 @@ class Client
      */
     private function getAuthorizationHeader()
     {
-        if ($this->access_token) {
-            return 'Bearer ' . $this->access_token;
+        if ($this->token) {
+            return 'Bearer ' . $this->token;
         }
     }
 
@@ -128,6 +133,22 @@ class Client
         $this->email 		= $config['email'];
         $this->password 	= $config['password'];
 		$this->use_sandbox  = $config['use_sandbox'];
+    }
+
+    /**
+     * Parses configuration.
+     *
+     * @param    array    $config
+     *
+     * @return   array    $config
+     */
+    private function getConfiguration()
+    {
+        return [
+            'email'         => $this->email,
+            'password'      => $this->password,
+            'use_sandbox'   => $this->use_sandbox
+        ];
     }
 
     /**
