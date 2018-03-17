@@ -2,6 +2,7 @@
 
 namespace Shiprocket;
 
+use Exception;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\ClientException as HttpClientException;
 use GuzzleHttp\Psr7\Response;
@@ -14,16 +15,15 @@ class Client
     use Resources\Manifests;
     use Resources\Products;
     use Resources\Settings;
-    use Resources\Users;
     use Resources\Orders;
 
-	private $token;
-    private $email;
-    private $password;
-	private $use_sandbox;
-	private $version = 'v1';
-    private $rate_limit = null;
-    private $httpClient;
+	public $token;
+    public $email;
+    public $password;
+	public $use_sandbox;
+	public $version = 'v1';
+    public $rate_limit = null;
+    public $httpClient;
 
     /**
      * Creates a new client.
@@ -31,9 +31,13 @@ class Client
      * @param    array    $config
      */
     public function __construct($config = [])
-    {
+    {        
 		$this->configure($config);
         $this->httpClient = new HttpClient;
+        
+        if (empty($this->token)) {
+            $this->setToken($this->getToken());
+        }
     }
 
     /**
@@ -41,7 +45,7 @@ class Client
      *
      * @return   string
      */
-    private function getAuthorizationHeader()
+    public function getAuthorizationHeader()
     {
         if ($this->token) {
             return 'Bearer ' . $this->token;
@@ -56,7 +60,7 @@ class Client
      *
      * @return   array
      */
-    private function getConfigForVerbAndParameters($verb, $parameters = [])
+    public function getConfigForVerbAndParameters($verb, $parameters = [])
     {
         $config = [
             'headers' => $this->getHeaders()
@@ -98,7 +102,7 @@ class Client
 
         $host = 'https://'.($this->use_sandbox ? 'krmct000.kartrocket.com/' : 'apiv2.shiprocket.in/');
 
-        return $host.($this->version ? '/' .$this->version : '').'/'.$path;
+        return $host.($this->version ? $this->version : '').'/'.$path;
     }
 
     /**
@@ -109,11 +113,11 @@ class Client
      * @return   void
      * @throws   Exception
      */
-    private function handleRequestException(HttpClientException $e)
+    public function handleRequestException(HttpClientException $e)
     {
         if ($response = $e->getResponse()) {
             $exception = new Exception($response->getReasonPhrase(), $response->getStatusCode(), $e);
-            $exception->setBody(json_decode($response->getBody()));
+            // $exception->setBody(json_decode($response->getBody()));
 
             throw $exception;
         }
@@ -128,11 +132,13 @@ class Client
      *
      * @return   array    $config
      */
-    private function configure($config = [])
+    public function configure($config = [])
     {
         $this->email 		= $config['email'];
         $this->password 	= $config['password'];
-		$this->use_sandbox  = $config['use_sandbox'];
+        $this->use_sandbox  = $config['use_sandbox'];
+        
+        return $this;
     }
 
     /**
@@ -142,7 +148,7 @@ class Client
      *
      * @return   array    $config
      */
-    private function getConfiguration()
+    public function getConfiguration()
     {
         return [
             'email'         => $this->email,
@@ -152,13 +158,36 @@ class Client
     }
 
     /**
+     * Get authorization token
+     *
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->request('POST', 'auth/login', $this->getConfiguration())['token'];
+    }
+
+    /**
+     * Set authorization token
+     *
+     * @param string $value
+     * @return this
+     */
+    public function setToken($value)
+    {
+        $this->token = $value;
+        
+        return $this;
+    }
+
+    /**
      * Attempts to pull rate limit headers from response and add to client.
      *
      * @param    Response $response
      *
      * @return   void
      */
-    private function parseRateLimitFromResponse(Response $response)
+    public function parseRateLimitFromResponse(Response $response)
     {
         $rateLimitHeaders = array_filter([
             $response->getHeader('X-Rate-Limit-Limit'),
@@ -182,7 +211,7 @@ class Client
      * @return   stdClass             The JSON response from the request
      * @throws   Exception
      */
-    protected function request($verb, $path, $parameters = [])
+    public function request($verb, $path, $parameters = [])
     {
         $client = $this->httpClient;
         $url = $this->getUrlFromPath($path);
@@ -197,7 +226,7 @@ class Client
 
         $this->parseRateLimitFromResponse($response);
 
-        return json_decode($response->getBody());
+        return json_decode($response->getBody(), 1);
     }
 
     /**

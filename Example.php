@@ -6,17 +6,21 @@ use Shiprocket\Client;
 
 class Example
 {
-	public function logind()
+	public function login()
 	{
 		$client = new Client([
-			'email' 		=> 'rajat.hans@kartrocket.com',
-			'password' 		=> '1q2w3e4r5t',
+			'email' 		=> '',
+			'password' 		=> '',
 			'use_sandbox'	=> 0
 		]);
 
-		$client->getConfiguration();
+		$orders = $client->getOrders();
+		var_dump($orders);
+
+		// $client->getToken();
+		// var_dump($client->token);
 	}
 }
 
 $example = new Example();
-$example->logind();
+$example->login();
