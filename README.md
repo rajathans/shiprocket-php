@@ -1,4 +1,4 @@
-[![N|Solid](http://www.kartrocket.com/wp-content/uploads/2013/08/shiprocket_logo.png)](https://nodesource.com/products/nsolid)
+[![N|Solid](http://www.kartrocket.com/wp-content/uploads/2013/08/shiprocket_logo.png)](https://app.shiprocket.in/)
 
 # Shiprocket SDK for PHP (WIP)
 
