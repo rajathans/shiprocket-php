@@ -11,11 +11,12 @@ use ReflectionClass;
 
 class Client
 {
-    use Resources\Users;
-    use Resources\Manifests;
-    use Resources\Products;
-    use Resources\Settings;
-    use Resources\Orders;
+    use Resources\Users,
+        Resources\Manifests,
+        Resources\Products,
+        Resources\Settings,
+        Resources\Orders,
+        Resources\Couriers;
 
 	public $token;
     public $email;
@@ -43,7 +44,7 @@ class Client
     /**
      * Gets authorization header value.
      *
-     * @return   string
+     * @return string
      */
     public function getAuthorizationHeader()
     {
@@ -145,7 +146,6 @@ class Client
      * Parses configuration.
      *
      * @param    array    $config
-     *
      * @return   array    $config
      */
     public function getConfiguration()
@@ -164,7 +164,11 @@ class Client
      */
     public function getToken()
     {
-        return $this->request('POST', 'auth/login', $this->getConfiguration())['token'];
+        return $this->request(
+            'post', 
+            'auth/login', 
+            $this->getConfiguration()
+        )['token'];
     }
 
     /**

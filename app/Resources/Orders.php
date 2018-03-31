@@ -5,21 +5,46 @@ namespace Shiprocket\Resources;
 trait Orders
 {
     /**
-     * @return   stdClass               The JSON response from the request
+     * Get all orders
+     *
+     * @return void
      */
     public function getOrders()
     {
         return $this->request('get', 'orders');
     }
     
+    /**
+     * Get order data
+     *
+     * @param string $order_id Shiprocket Order ID
+     * @return void
+     */
     public function getOrder($order_id)
     {
-        return $this->request('get', 'requests/'.$order_id);
+        return $this->request('get', 'orders/'.$order_id);
     }
 
-    public function createOrder($attributes = [])
+    /**
+     * Create a quick order
+     *
+     * @param array $attributes Order data
+     * @return void
+     */
+    public function createQuickOrder($attributes = [])
     {
-        return $this->request('post', 'orders', $attributes);
+        return $this->request('post', 'orders/create/adhoc', $attributes);
+    }
+
+    /**
+     * Create a linked order
+     *
+     * @param array $attributes Order data
+     * @return void
+     */
+    public function createLinkedOrder($attributes = [])
+    {
+        return $this->request('post', 'orders/create', $attributes);
     }
 
     /**
