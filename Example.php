@@ -9,8 +9,8 @@ class Example
 	public function login()
 	{
 		$client = new ShiprocketClient([
-			'email' 		=> 'shiprocketuat@gmail.com',
-			'password' 		=> '123456',
+			'email' 		=> '',
+			'password' 		=> '',
 			'use_sandbox'	=> 0
 		]);
 

@@ -103,7 +103,7 @@ class Client
 
         $host = 'https://'.($this->use_sandbox ? 'krmct000.kartrocket.com/' : 'apiv2.shiprocket.in/');
 
-        return $host.($this->version ? $this->version : '').'/'.$path;
+        return $host.($this->version ? $this->version : '').'/external/'.$path;
     }
 
     /**
@@ -185,27 +185,6 @@ class Client
     }
 
     /**
-     * Attempts to pull rate limit headers from response and add to client.
-     *
-     * @param    Response $response
-     *
-     * @return   void
-     */
-    public function parseRateLimitFromResponse(Response $response)
-    {
-        $rateLimitHeaders = array_filter([
-            $response->getHeader('X-Rate-Limit-Limit'),
-            $response->getHeader('X-Rate-Limit-Remaining'),
-            $response->getHeader('X-Rate-Limit-Reset')
-        ]);
-
-        if (count($rateLimitHeaders) == 3) {
-            $rateLimitClass = new ReflectionClass(RateLimit::class);
-            $this->rate_limit = $rateLimitClass->newInstanceArgs($rateLimitHeaders);
-        }
-    }
-
-    /**
      * Makes a request to the Shiprocket API and returns the response.
      *
      * @param    string   $verb       The Http verb to use
@@ -227,8 +206,6 @@ class Client
         } catch (HttpClientException $e) {
             $this->handleRequestException($e);
         }
-
-        $this->parseRateLimitFromResponse($response);
 
         return json_decode($response->getBody(), 1);
     }
