@@ -1,1 +1,7 @@
 language: php
+script: phpunit --configuration $DB.phpunit.xml
+
+before_script:
+  - travis_retry composer self-update
+  - travis_retry composer install --no-interaction --prefer-source --dev
+  - travis_retry phpenv rehash
