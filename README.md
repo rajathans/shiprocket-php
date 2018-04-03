@@ -2,6 +2,8 @@
 
 # Shiprocket SDK for PHP (WIP)
 
+[![Build Status]](https://travis-ci.org/rajathans/shiprocket-php)
+
 This project enables PHP developers to use the [Shiprocket API](http://devdockui.shiprocket.in) in their PHP code, and build software using services such as Shipments, Inventory management, Shipping orders, etc. You can get started by installing the SDK via Composer and by following the Basic Usage Guide given below.
 
 This is a personal project that has been developed by me, [Rajat Hans](http://rajathans.github.io). I decided to create this project to make up for the lack of an official PHP SDK for Shiprocket. As of now, it is in no way endorsed, sponsored or maintained by Shiprocket.
