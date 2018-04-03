@@ -1,5 +1,5 @@
 language: php
-script: phpunit src/ShiprocketTest.php
+script: phpunit tests/src/ShiprocketTest.php
 
 before_script:
   - travis_retry composer self-update
