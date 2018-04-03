@@ -18,7 +18,7 @@ trait Couriers
 		$pickup_postcode, 
 		$delivery_postcode, 
 		$is_cod = 0, 
-		$weight = 0.5, 
+		$weight = 0, 
 		$shiprocket_order_id = 0
 	) {
         return $this->request(
