@@ -1,4 +1,4 @@
-[![N|Solid](http://www.kartrocket.com/wp-content/uploads/2013/08/shiprocket_logo.png =100x)](https://app.shiprocket.in/)
+<!-- [![N|Solid](http://www.kartrocket.com/wp-content/uploads/2013/08/shiprocket_logo.png =100x)](https://app.shiprocket.in/) -->
 
 # Shiprocket SDK for PHP (WIP)
 
