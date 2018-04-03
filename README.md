@@ -27,7 +27,7 @@ This is a personal project that has been developed by me, [Rajat Hans](http://ra
 
 ## Requirements
 
-  - PHP >= 5.5
+  - PHP >= 5.6
   - Composer
 
 ## Installation
