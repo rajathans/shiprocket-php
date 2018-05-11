@@ -12,7 +12,7 @@ This is a personal project that has been developed by me, [Rajat Hans](http://ra
 
   - Compatible with PHP 5.5 or greater.
   - Easy to install with [Composer](http://getcomposer.org/).
-  - Orders : Create orders, Get all orders data, Get single order data from Shiprocket
+  - Orders : Create orders, Get all orders data, Get single order data from Shiprocket.
 
 ## Features
 - Inventory management using Products and Listings.
@@ -43,7 +43,7 @@ The SDK can be installed with [Composer](http://getcomposer.org/).
   1. Install the SDK.
 
      ```
-     php composer.phar rajathans/shiprocket-php
+     php composer.phar install rajathans/shiprocket-php
      ```
 
   1. Require Composer's autoloader by adding the following line to your code.
